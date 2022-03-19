@@ -1,0 +1,41 @@
+
+<?php echo $this->getContent() ?>
+<div class="row">
+    <div align="right">
+        <?= $this->tag->linkTo(["car_make/new", "Crear un nuevo fabricante", 'class' => 'btn btn-primary']);?>
+    </div>
+</div>
+
+<div class="row">
+<?php
+if ($car_makes->count() > 0) {
+?>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($car_makes as $car_make) {
+            echo '<tr>';
+                echo '<td>'.$car_make->ID_CAR_MAKE.'</td>';
+                echo '<td>'.$car_make->name.'</td>';
+                echo '<td></td>';
+            echo '</tr>';
+        }
+        ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Users quantity: <?php echo $car_makes->count(); ?></td>
+            </tr>
+        </tfoot>
+    </table>
+<?php
+}
+?>
+</div>

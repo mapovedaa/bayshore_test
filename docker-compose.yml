@@ -1,0 +1,29 @@
+version: "3.3"
+
+volumes:
+    mysql_db_data:
+    logs:
+        driver: local
+services:
+    mysql_db:
+        image: mysql:8.0.28
+        container_name: mysql_db
+        environment:
+            MYSQL_DATABASE: 'bayshore'
+            MYSQL_USER: 'mike'
+            MYSQL_PASSWORD: '**Mike2022'
+            MYSQL_ROOT_PASSWORD: 'root123'
+        ports:
+            - 33060:3306
+        volumes:
+            - mysql_db_data:/var/lib/mysql
+    rctechsoft:
+        image: rctechsoft/phalcon-template:cuarto
+        environment:
+            - DB_SERVER=mysql_db
+        volumes:
+            - ./www/html:/var/www/html
+        ports: 
+            - 80:80
+        links:
+            - mysql_db

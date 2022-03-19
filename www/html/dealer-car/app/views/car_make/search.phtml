@@ -1,0 +1,54 @@
+<?php use Phalcon\Tag; ?>
+
+<?php echo $this->getContent(); ?>
+
+<table width="100%">
+    <tr>
+        <td align="left">
+            <?php echo $this->tag->linkTo(array("car_make/index", "Go Back")); ?>
+        </td>
+        <td align="right">
+            <?php echo $this->tag->linkTo(array("car_make/new", "Create ")); ?>
+        </td>
+    </tr>
+</table>
+
+<table class="browse" align="center">
+    <thead>
+        <tr>
+            <th>ID Of CAR Of MAKE</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Date Of Create</th>
+            <th>Date Of Update</th>
+         </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($page->items as $car_make) { ?>
+        <tr>
+            <td><?php echo $car_make->ID_CAR_MAKE ?></td>
+            <td><?php echo $car_make->name ?></td>
+            <td><?php echo $car_make->status ?></td>
+            <td><?php echo $car_make->date_create ?></td>
+            <td><?php echo $car_make->date_update ?></td>
+            <td><?php echo $this->tag->linkTo(array("car_make/edit/" . $car_make->ID_CAR_MAKE, "Edit")); ?></td>
+            <td><?php echo $this->tag->linkTo(array("car_make/delete/" . $car_make->ID_CAR_MAKE, "Delete")); ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+    <tbody>
+        <tr>
+            <td colspan="2" align="right">
+                <table align="center">
+                    <tr>
+                        <td><?php echo $this->tag->linkTo("car_make/search", "First") ?></td>
+                        <td><?php echo $this->tag->linkTo("car_make/search?page=" . $page->before, "Previous") ?></td>
+                        <td><?php echo $this->tag->linkTo("car_make/search?page=" . $page->next, "Next") ?></td>
+                        <td><?php echo $this->tag->linkTo("car_make/search?page=" . $page->last, "Last") ?></td>
+                        <td><?php echo $page->current, "/", $page->total_pages ?></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
