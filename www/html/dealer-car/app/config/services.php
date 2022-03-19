@@ -19,7 +19,7 @@ $di = new FactoryDefault();
 $di->set('url', function () use ($config) {
     $url = new UrlResolver();
     $url->setBaseUri($config->application->baseUri);
-
+    
     return $url;
 }, true);
 

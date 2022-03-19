@@ -1,0 +1,49 @@
+<?php echo $this->getContent() ?>
+
+<div class="row">
+    <div align="right">
+        <?= $this->tag->linkTo(["car_generation/new", "Crear una nueva generacion", 'class' => 'btn btn-primary']);?>
+    </div>
+</div>
+
+<div class="row">
+<?php
+if ($car_generations->count() > 0) {
+?>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Modelo</th>
+            <th>Fabricante</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($car_generations as $car_generation) {
+            echo '<tr>';
+                echo '<td>'.$car_generation->ID_CAR_GENERATION.'</td>';
+                echo '<td>'.$car_generation->toString().'</td>';
+                echo '<td>'.$car_generation->car_model->getName().'</td>';
+                echo '<td>'.$car_generation->car_model->car_make->name.'</td>';
+                echo '<td>'.(($car_generation->status == 1)?'Activo':'Inactivo').'</td>';
+                echo '<td>'.$this->tag->linkTo(['car_generation/edit/'.$car_generation->ID_CAR_GENERATION, 'Editar', 'class' => 'btn btn-secondary']).
+                            (($car_generation->status == 1)?$this->tag->linkTo(['car_generation/delete/'.$car_generation->ID_CAR_GENERATION, 'Eliminar', 'class' => 'btn btn-danger']):'').'</td>';
+            echo '</tr>';
+        }
+        ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6">Car Generations quantity: <?php echo $car_generations->count(); ?></td>
+            </tr>
+        </tfoot>
+    </table>
+<?php
+}
+?>
+</div>
+

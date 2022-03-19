@@ -65,11 +65,8 @@ class CarMakeController extends ControllerBase
      *
      * @param string $ID_CAR_MAKE
      */
-    public function editAction($ID_CAR_MAKE)
-    {
-
+    public function editAction($ID_CAR_MAKE){
         if (!$this->request->isPost()) {
-
             $car_make = CarMake::findFirstByID_CAR_MAKE($ID_CAR_MAKE);
             if (!$car_make) {
                 $this->flash->error("car_make was not found");
@@ -136,22 +133,18 @@ class CarMakeController extends ControllerBase
      * Saves a car_make edited
      *
      */
-    public function saveAction()
-    {
-
+    public function saveAction(){
         if (!$this->request->isPost()) {
             return $this->dispatcher->forward(array(
                 "controller" => "car_make",
                 "action" => "index"
             ));
         }
-
+        
         $ID_CAR_MAKE = $this->request->getPost("ID_CAR_MAKE");
-
         $car_make = CarMake::findFirstByID_CAR_MAKE($ID_CAR_MAKE);
         if (!$car_make) {
             $this->flash->error("car_make does not exist " . $ID_CAR_MAKE);
-
             return $this->dispatcher->forward(array(
                 "controller" => "car_make",
                 "action" => "index"
@@ -160,12 +153,8 @@ class CarMakeController extends ControllerBase
 
         $car_make->name = $this->request->getPost("name");
         $car_make->status = $this->request->getPost("status");
-        $car_make->date_create = $this->request->getPost("date_create");
-        $car_make->date_update = $this->request->getPost("date_update");
-        
-
+        $car_make->date_update = date('Y/m/d h:i:s', time());
         if (!$car_make->save()) {
-
             foreach ($car_make->getMessages() as $message) {
                 $this->flash->error($message);
             }
@@ -212,7 +201,7 @@ class CarMakeController extends ControllerBase
 
             return $this->dispatcher->forward(array(
                 "controller" => "car_make",
-                "action" => "search"
+                "action" => "index"
             ));
         }
 

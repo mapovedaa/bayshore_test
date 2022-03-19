@@ -59,7 +59,7 @@ CREATE TABLE `car_make` (
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID_CAR_MAKE`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `car_make` (
 
 LOCK TABLES `car_make` WRITE;
 /*!40000 ALTER TABLE `car_make` DISABLE KEYS */;
-INSERT INTO `car_make` VALUES (1,'Renault',1,'2022-03-18 15:56:49','2022-03-18 15:56:49'),(2,'Chevrolet',1,'2022-03-19 12:32:17',NULL),(3,'Mazda',1,'2022-03-18 07:34:20',NULL);
+INSERT INTO `car_make` VALUES (1,'Groupe Renault',1,'2022-03-18 15:56:49','2022-03-19 10:49:11'),(2,'Chevrolet',1,'2022-03-19 12:32:17',NULL),(5,'Toyota',0,'2022-03-19 10:15:03',NULL),(6,'Honda',1,'2022-03-19 10:15:09',NULL);
 /*!40000 ALTER TABLE `car_make` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,4 +246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-18 20:13:22
+-- Dump completed on 2022-03-19 10:51:42

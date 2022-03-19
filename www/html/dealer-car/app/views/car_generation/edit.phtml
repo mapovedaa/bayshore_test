@@ -1,0 +1,72 @@
+
+<?php echo $this->getContent(); ?>
+
+<?php echo $this->tag->form("car_generation/save") ?>
+
+<table width="100%">
+    <tr>
+        <td align="left"><?php echo $this->tag->linkTo(array("car_generation", "Back")) ?></td>
+        <td align="right"><?php echo $this->tag->submitButton("Save") ?></td>
+    </tr>
+</table>
+
+<div align="center">
+    <h1>Edit car_generation</h1>
+</div>
+
+<table>
+    <tr>
+        <td align="right">
+            <label for="name">Name</label>
+        </td>
+        <td align="left">
+            <?php echo $this->tag->textField(array("name", "size" => 30)) ?>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <label for="year_begin">Year Of Begin</label>
+        </td>
+        <td align="left">
+            <?php echo $this->tag->textField(array("year_begin", "size" => 30)) ?>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <label for="year_end">Year Of End</label>
+        </td>
+        <td align="left">
+            <?php echo $this->tag->textField(array("year_end", "size" => 30)) ?>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <label for="status">Status</label>
+        </td>
+        <td align="left">
+            <?php echo $this->tag->textField(array("status", "type" => "number")) ?>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <label for="FK_CAR_MODEL">Modelo</label>
+        </td>
+        <td align="left">
+            <?php
+            echo $this->tag->select([
+                "FK_CAR_MODEL", $car_models,
+                "useEmpty"  =>  true,
+                "emptyText" =>  "Please select",
+                "using" => ["ID_CAR_MODEL", "name"]
+            ]);
+            ?>
+        </td>
+    </tr>
+
+    <tr>
+        <td><?php echo $this->tag->hiddenField("ID_CAR_GENERATION") ?></td>
+        <td><?php echo $this->tag->submitButton("Save") ?></td>
+    </tr>
+</table>
+
+</form>

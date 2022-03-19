@@ -1,70 +1,45 @@
-
 <?php echo $this->getContent() ?>
 
-<div align="right">
-    <?php echo $this->tag->linkTo(array("car_model/new", "Create car_model")) ?>
+<div class="row">
+    <div align="right">
+        <?= $this->tag->linkTo(["car_model/new", "Crear un nuevo modelo", 'class' => 'btn btn-primary']);?>
+    </div>
 </div>
 
-<?php echo $this->tag->form(array("car_model/search", "autocomplete" => "off")) ?>
-
-<div align="center">
-    <h1>Search car_model</h1>
+<div class="row">
+<?php
+if ($car_models->count() > 0) {
+?>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Fabricante</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($car_models as $car_model) {
+            echo '<tr>';
+                echo '<td>'.$car_model->getIdCarModel().'</td>';
+                echo '<td>'.$car_model->getName().'</td>';
+                echo '<td>'.$car_model->car_make->name.'</td>';
+                echo '<td>'.(($car_model->getStatus() == 1)?'Activo':'Inactivo').'</td>';
+                echo '<td>'.$this->tag->linkTo(['car_model/edit/'.$car_model->getIdCarModel(), 'Editar', 'class' => 'btn btn-secondary']).
+                            (($car_model->getStatus() == 1)?$this->tag->linkTo(['car_model/delete/'.$car_model->getIdCarModel(), 'Eliminar', 'class' => 'btn btn-danger']):'').'</td>';
+            echo '</tr>';
+        }
+        ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">Car Models quantity: <?php echo $car_models->count(); ?></td>
+            </tr>
+        </tfoot>
+    </table>
+<?php
+}
+?>
 </div>
-
-<table>
-    <tr>
-        <td align="right">
-            <label for="ID_CAR_MODEL">ID Of CAR Of MODEL</label>
-        </td>
-        <td align="left">
-            <?php echo $this->tag->textField(array("ID_CAR_MODEL", "type" => "number")) ?>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <label for="name">Name</label>
-        </td>
-        <td align="left">
-            <?php echo $this->tag->textField(array("name", "size" => 30)) ?>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <label for="status">Status</label>
-        </td>
-        <td align="left">
-            <?php echo $this->tag->textField(array("status", "type" => "number")) ?>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <label for="date_create">Date Of Create</label>
-        </td>
-        <td align="left">
-            <?php echo $this->tag->textField(array("date_create", "size" => 30)) ?>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <label for="date_update">Date Of Update</label>
-        </td>
-        <td align="left">
-            <?php echo $this->tag->textField(array("date_update", "size" => 30)) ?>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <label for="FK_CAR_MAKE">FK Of CAR Of MAKE</label>
-        </td>
-        <td align="left">
-            <?php echo $this->tag->textField(array("FK_CAR_MAKE", "type" => "number")) ?>
-        </td>
-    </tr>
-
-    <tr>
-        <td></td>
-        <td><?php echo $this->tag->submitButton("Search") ?></td>
-    </tr>
-</table>
-
-</form>

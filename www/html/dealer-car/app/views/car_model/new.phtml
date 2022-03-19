@@ -25,34 +25,17 @@
     </tr>
     <tr>
         <td align="right">
-            <label for="status">Status</label>
+            <label for="FK_CAR_MAKE">Fabricante</label>
         </td>
         <td align="left">
-            <?php echo $this->tag->textField(array("status", "type" => "number")) ?>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <label for="date_create">Date Of Create</label>
-        </td>
-        <td align="left">
-            <?php echo $this->tag->textField(array("date_create", "size" => 30)) ?>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <label for="date_update">Date Of Update</label>
-        </td>
-        <td align="left">
-            <?php echo $this->tag->textField(array("date_update", "size" => 30)) ?>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <label for="FK_CAR_MAKE">FK Of CAR Of MAKE</label>
-        </td>
-        <td align="left">
-            <?php echo $this->tag->textField(array("FK_CAR_MAKE", "type" => "number")) ?>
+            <select name="FK_CAR_MAKE" id="FK_CAR_MAKE" class="form-control">
+                <option>Selecciona un fabricante</option>
+                <?php 
+                foreach ($car_makes as $make) {
+                    echo "<option value='" . $make->ID_CAR_MAKE . "'>$make->name</option>";
+                }
+                ?>
+            </select>
         </td>
     </tr>
 

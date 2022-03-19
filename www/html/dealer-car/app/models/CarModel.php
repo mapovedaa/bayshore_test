@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Mvc\Model;
+use Phalcon\Mvc\Model\Behavior\SoftDelete;
 
 class CarModel extends Model{
 
@@ -183,9 +184,15 @@ class CarModel extends Model{
      */
     public function initialize()
     {
-        $this->hasMany('ID_CAR_MODEL', 'Car_serie', 'FK_CAR_MODEL', array('alias' => 'Car_serie'));
-        $this->hasMany('ID_CAR_MODEL', 'Car_trim', 'FK_CAR_MODEL', array('alias' => 'Car_trim'));
-        $this->belongsTo('FK_CAR_MAKE', 'Car_make', 'ID_CAR_MAKE', array('alias' => 'Car_make'));
+        $this->hasMany('ID_CAR_MODEL', 'Car_serie', 'FK_CAR_MODEL', array('alias' => 'car_serie'));
+        $this->hasMany('ID_CAR_MODEL', 'Car_trim', 'FK_CAR_MODEL', array('alias' => 'car_trim'));
+        $this->belongsTo('FK_CAR_MAKE', 'CarMake', 'ID_CAR_MAKE', array('alias' => 'car_make'));
+        $this->addBehavior(
+            new SoftDelete([
+                'field' => 'status',
+                'value' => 0,
+            ])
+        );
     }
 
     /**

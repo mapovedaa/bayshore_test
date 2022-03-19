@@ -1,7 +1,9 @@
 <?php
 
-class CarGeneration extends \Phalcon\Mvc\Model
-{
+use Phalcon\Mvc\Model;
+use Phalcon\Mvc\Model\Behavior\SoftDelete;
+
+class CarGeneration extends Model{
 
     /**
      *
@@ -50,6 +52,15 @@ class CarGeneration extends \Phalcon\Mvc\Model
      * @var integer
      */
     public $FK_CAR_MODEL;
+    
+    /**
+     * Returns the value of field name
+     *
+     * @return string
+     */
+    public function toString(){
+        return $this->name." [$this->year_begin - $this->year_end]";
+    }
 
     /**
      * Initialize method for model.
@@ -57,6 +68,13 @@ class CarGeneration extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->hasMany('ID_CAR_GENERATION', 'Car_serie', 'FK_CAR_GENERATION', array('alias' => 'Car_serie'));
+        $this->belongsTo('FK_CAR_MODEL', 'CarModel', 'ID_CAR_MODEL', array('alias' => 'car_model'));
+        $this->addBehavior(
+            new SoftDelete([
+                'field' => 'status',
+                'value' => 0,
+            ])
+        );
     }
 
     /**

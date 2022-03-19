@@ -15,6 +15,7 @@ if ($car_makes->count() > 0) {
         <tr>
             <th>#</th>
             <th>Name</th>
+            <th>Estado</th>
             <th></th>
         </tr>
         </thead>
@@ -24,7 +25,9 @@ if ($car_makes->count() > 0) {
             echo '<tr>';
                 echo '<td>'.$car_make->ID_CAR_MAKE.'</td>';
                 echo '<td>'.$car_make->name.'</td>';
-                echo '<td></td>';
+                echo '<td>'.(($car_make->status == 1)?'Activo':'Inactivo').'</td>';
+                echo '<td>'.$this->tag->linkTo(['car_make/edit/'.$car_make->ID_CAR_MAKE, 'Editar', 'class' => 'btn btn-secondary']).
+                            (($car_make->status == 1)?$this->tag->linkTo(['car_make/delete/'.$car_make->ID_CAR_MAKE, 'Eliminar', 'class' => 'btn btn-danger']):'').'</td>';
             echo '</tr>';
         }
         ?>

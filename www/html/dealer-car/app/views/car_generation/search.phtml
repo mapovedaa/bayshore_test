@@ -1,0 +1,60 @@
+<?php use Phalcon\Tag; ?>
+
+<?php echo $this->getContent(); ?>
+
+<table width="100%">
+    <tr>
+        <td align="left">
+            <?php echo $this->tag->linkTo(array("car_generation/index", "Go Back")); ?>
+        </td>
+        <td align="right">
+            <?php echo $this->tag->linkTo(array("car_generation/new", "Create ")); ?>
+        </td>
+    </tr>
+</table>
+
+<table class="browse" align="center">
+    <thead>
+        <tr>
+            <th>ID Of CAR Of GENERATION</th>
+            <th>Name</th>
+            <th>Year Of Begin</th>
+            <th>Year Of End</th>
+            <th>Status</th>
+            <th>Date Of Create</th>
+            <th>Date Of Update</th>
+            <th>FK Of CAR Of MODEL</th>
+         </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($page->items as $car_generation) { ?>
+        <tr>
+            <td><?php echo $car_generation->ID_CAR_GENERATION ?></td>
+            <td><?php echo $car_generation->name ?></td>
+            <td><?php echo $car_generation->year_begin ?></td>
+            <td><?php echo $car_generation->year_end ?></td>
+            <td><?php echo $car_generation->status ?></td>
+            <td><?php echo $car_generation->date_create ?></td>
+            <td><?php echo $car_generation->date_update ?></td>
+            <td><?php echo $car_generation->FK_CAR_MODEL ?></td>
+            <td><?php echo $this->tag->linkTo(array("car_generation/edit/" . $car_generation->ID_CAR_GENERATION, "Edit")); ?></td>
+            <td><?php echo $this->tag->linkTo(array("car_generation/delete/" . $car_generation->ID_CAR_GENERATION, "Delete")); ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+    <tbody>
+        <tr>
+            <td colspan="2" align="right">
+                <table align="center">
+                    <tr>
+                        <td><?php echo $this->tag->linkTo("car_generation/search", "First") ?></td>
+                        <td><?php echo $this->tag->linkTo("car_generation/search?page=" . $page->before, "Previous") ?></td>
+                        <td><?php echo $this->tag->linkTo("car_generation/search?page=" . $page->next, "Next") ?></td>
+                        <td><?php echo $this->tag->linkTo("car_generation/search?page=" . $page->last, "Last") ?></td>
+                        <td><?php echo $page->current, "/", $page->total_pages ?></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

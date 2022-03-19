@@ -9,8 +9,7 @@ class CarModelController extends ControllerBase
     /**
      * Index action
      */
-    public function indexAction()
-    {
+    public function indexAction(){
         $this->view->car_models = CarModel::find();
     }
 
@@ -56,9 +55,8 @@ class CarModelController extends ControllerBase
     /**
      * Displays the creation form
      */
-    public function newAction()
-    {
-
+    public function newAction(){
+        $this->view->car_makes = CarMake::find();
     }
 
     /**
@@ -82,13 +80,13 @@ class CarModelController extends ControllerBase
             }
 
             $this->view->ID_CAR_MODEL = $car_model->ID_CAR_MODEL;
+            $this->view->car_makes = CarMake::find();
+            $this->view->FK_CAR_MAKE = $car_model->getFkCarMake();
 
-            $this->tag->setDefault("ID_CAR_MODEL", $car_model->ID_CAR_MODEL);
-            $this->tag->setDefault("name", $car_model->name);
-            $this->tag->setDefault("status", $car_model->status);
-            $this->tag->setDefault("date_create", $car_model->date_create);
-            $this->tag->setDefault("date_update", $car_model->date_update);
-            $this->tag->setDefault("FK_CAR_MAKE", $car_model->FK_CAR_MAKE);
+            $this->tag->setDefault("ID_CAR_MODEL", $car_model->getIdCarModel());
+            $this->tag->setDefault("name", $car_model->getName());
+            $this->tag->setDefault("status", $car_model->getStatus());
+            $this->tag->setDefault("FK_CAR_MAKE", $car_model->getFkCarMake());
             
         }
     }
@@ -109,9 +107,9 @@ class CarModelController extends ControllerBase
         $car_model = new CarModel();
 
         $car_model->name = $this->request->getPost("name");
-        $car_model->status = $this->request->getPost("status");
-        $car_model->date_create = $this->request->getPost("date_create");
-        $car_model->date_update = $this->request->getPost("date_update");
+        $car_model->status = 1;
+        $car_model->date_create = date('Y/m/d h:i:s', time());
+        $car_model->date_update = null;
         $car_model->FK_CAR_MAKE = $this->request->getPost("FK_CAR_MAKE");
         
 
@@ -139,9 +137,7 @@ class CarModelController extends ControllerBase
      * Saves a car_model edited
      *
      */
-    public function saveAction()
-    {
-
+    public function saveAction(){
         if (!$this->request->isPost()) {
             return $this->dispatcher->forward(array(
                 "controller" => "car_model",
@@ -163,11 +159,9 @@ class CarModelController extends ControllerBase
 
         $car_model->name = $this->request->getPost("name");
         $car_model->status = $this->request->getPost("status");
-        $car_model->date_create = $this->request->getPost("date_create");
-        $car_model->date_update = $this->request->getPost("date_update");
+        $car_model->date_update =  date('Y/m/d h:i:s', time());
         $car_model->FK_CAR_MAKE = $this->request->getPost("FK_CAR_MAKE");
         
-
         if (!$car_model->save()) {
 
             foreach ($car_model->getMessages() as $message) {
